@@ -6,13 +6,13 @@ import (
 	"sync"
 )
 
-type Promises struct {
+type promises struct {
 	fn     interface{}
 	params interface{}
 }
 
 // execute is a function to execute promise
-func (p Promises) execute(wg *sync.WaitGroup, result chan []reflect.Value) {
+func (p promises) execute(wg *sync.WaitGroup, result chan []reflect.Value) {
 	log.Println("Executing promise....")
 	defer wg.Done()
 

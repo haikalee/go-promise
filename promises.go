@@ -7,24 +7,24 @@ import (
 	"sync"
 )
 
-type Promise struct {
-	promises []Promises
+type promise struct {
+	promises []promises
 }
 
 // Promises is a struct to store function and parameters
-func NewPromise() *Promise {
-	return &Promise{
-		promises: []Promises{},
+func NewPromise() *promise {
+	return &promise{
+		promises: []promises{},
 	}
 }
 
 // add is a function to add a function to promise
-func (p *Promise) Add(fn interface{}, params ...interface{}) error {
+func (p *promise) Add(fn interface{}, params ...interface{}) error {
 	if reflect.TypeOf(fn).Kind() != reflect.Func {
 		return errors.New("fn is not a function")
 	}
 
-	p.promises = append(p.promises, Promises{
+	p.promises = append(p.promises, promises{
 		fn:     fn,
 		params: params,
 	})
@@ -33,7 +33,7 @@ func (p *Promise) Add(fn interface{}, params ...interface{}) error {
 }
 
 // Fetch is a function to fetch all data from promise
-func (p *Promise) Fetch() (datas [][]reflect.Value) {
+func (p *promise) Fetch() (datas [][]reflect.Value) {
 	log.Println("Fetching data....")
 
 	// create wait group for waiting after all promise action is completed

@@ -82,6 +82,7 @@ func (p *promise) Fetch() (datas [][]reflect.Value) {
 			datas = append(datas, res)
 		case <-done:
 			isContinue = false
+			p.promises = []promises{}
 			close(done)
 		}
 	}
